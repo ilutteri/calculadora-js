@@ -12,11 +12,11 @@
 <body>
 
     <div class="calculadora">
-        <div class="pantalla">
+        <div id="pantalla">
             <p>0</p>
         </div>
         <div class="teclado">
-            <button onClick="">(</button>
+            <button>(</button>
             <button>)</button>
             <button>x!</button>
             <button>x²</button>
@@ -28,31 +28,33 @@
             <button>x³</button>
             <button>∛</button>
             <button>xⁿ</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
+            <button onclick="agregarNum(7)">7</button>
+            <button onclick="agregarNum(8)">8</button>
+            <button onclick="agregarNum(9)">9</button>
             <button>/</button>
             <button>%</button>
             <button>ln</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
+            <button onclick="agregarNum(4)">4</button>
+            <button onclick="agregarNum(5)">5</button>
+            <button onclick="agregarNum(6)">6</button>
             <button>*</button>
             <button>log</button>
             <button>e</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
+            <button onclick="agregarNum(1)">1</button>
+            <button onclick="agregarNum(2)">2</button>
+            <button onclick="agregarNum(3)">3</button>
             <button>-</button>
             <button>AC</button>
-            <button id="igual">=</button>
+            <button id="igual" onclick="igual()">=</button>
             <button>.</button>
-            <button>0</button>
+            <button onclick="agregarNum(0)">0</button>
             <button>π</button>
             <button>+</button>
             <button>MR</button>
         </div>
     </div>
+
+    <script src="index.js"></script>
 </body>
 
 </html>

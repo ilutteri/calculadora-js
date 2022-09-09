@@ -5,13 +5,15 @@ body {
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
+    background-image: url("https://www.nicepng.com/png/full/124-1244271_jpg-free-download-drawing-wood-pattern-wood-texture.png");
+    background-repeat: no-repeat;
 }
 
 .teclado{
     margin-top: 1em;
     display: grid;
     grid-template-columns: repeat(6, 3em);
-    grid-gap: 5px;
+    grid-gap: 7px;
     grid-auto-rows: minmax(3em, auto)
 }
 
@@ -19,13 +21,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border: 1px outset rgb(70, 69, 69);
     border-radius: 15px;
     font-family: 'Roboto', sans-serif;
     background-color: grey;
-    color:white;
+    color:rgba(255, 255, 255, 0.808);
     font-size: 21px;
-    box-shadow: 2px 2px grey;
+    box-shadow: 2px 2px rgb(90, 90, 90);
     cursor:pointer;
 }
 
@@ -39,21 +41,26 @@ body {
     grid-column: 6;
     grid-row: 5/7;
     background-color: orangered;
-    box-shadow: 2px 2px orangered;
+    box-shadow: 2px 2px rgba(255, 68, 0, 0.829);
+}
+#igual:active{
+    background-color: rgba(255, 68, 0, 0.829);
+    box-shadow: 1px 1px rgba(255, 68, 0, 0.829);
+    transform: translate(1px, 1px);
 }
 
-.pantalla {
+#pantalla {
     display: flex;
-    height: 4em;
     width: 19.5em;
     border: 1px solid black;
     align-items: center;
     justify-content: right;
     padding-right: 0.5em;
     font-family: 'Roboto', sans-serif;
-    font-size: 20px;
-    background-color: white;
+    font-size: 30px;
+    background-color: rgb(225, 228, 220);
     border-radius: 10px;
+    cursor: default;
 }
 
 .calculadora{
@@ -66,7 +73,7 @@ body {
     border: 2px solid black;
     padding: 1em;
     border-radius: 20px;
-    background-color:black;
+    background-color:rgb(32, 32, 32);
     box-shadow: 0.5px 0.5px 0px  rgba(255, 230, 3, 0.979),
                 1px 1px 0px rgba(255, 230, 3, 0.979),
                 2px 2px 0px rgba(255, 230, 3, 0.979),
