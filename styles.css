@@ -1,0 +1,33 @@
+.teclado{
+    margin: 1em;
+    display: grid;
+    grid-template-columns: repeat(6, 3em);
+    grid-gap: 5px;
+    grid-auto-rows: minmax(3em, auto)
+}
+
+.teclado> div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#igual{
+    grid-column: 6;
+    grid-row: 5/7;
+}
+
+.pantalla {
+    height: 4em;
+    width: 19.5em;
+    border: 1px solid black
+}
+
+.calculadora{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 20em;
+    justify-content: center;
+}
