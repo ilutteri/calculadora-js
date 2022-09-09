@@ -1,21 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+}
+
 .teclado{
-    margin: 1em;
+    margin-top: 1em;
     display: grid;
     grid-template-columns: repeat(6, 3em);
     grid-gap: 5px;
     grid-auto-rows: minmax(3em, auto)
 }
 
-.teclado> div {
+.teclado> button{
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    border-radius: 15px;
+    font-family: 'Roboto', sans-serif;
+    background-color: grey;
+    color:white;
+    font-size: 21px;
+    box-shadow: 2px 2px grey;
+    cursor:pointer;
+}
+
+.teclado > button:active{
+    background-color: rgb(90, 90, 90);
+    box-shadow: 1px 1px rgb(90, 90, 90);
+    transform: translate(1px, 1px)
 }
 
 #igual{
     grid-column: 6;
     grid-row: 5/7;
+    background-color: orangered;
+    box-shadow: 2px 2px orangered;
 }
 
 .pantalla {
@@ -25,14 +49,33 @@
     border: 1px solid black;
     align-items: center;
     justify-content: right;
-    
-
+    padding-right: 0.5em;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .calculadora{
+    margin-top: 3em;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     width: 20em;
     justify-content: center;
+    border: 2px solid black;
+    padding: 1em;
+    border-radius: 20px;
+    background-color:black;
+    box-shadow: 0.5px 0.5px 0px  rgba(255, 230, 3, 0.979),
+                1px 1px 0px rgba(255, 230, 3, 0.979),
+                2px 2px 0px rgba(255, 230, 3, 0.979),
+                3px 3px 0px rgba(255, 230, 3, 0.979),
+                4px 4px 0px orange,
+                5px 5px 0px orange,
+                6px 6px 0px orangered,
+                7px 7px 0px orangered,
+                8px 8px 0px orangered,
+                9px 9px 0px #999,
+                10px 10px 0px #999;
 }
