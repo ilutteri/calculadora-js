@@ -5,8 +5,6 @@ body {
     justify-content: center;
     align-items: center;
     background-color: whitesmoke;
-    background-image: url("https://www.nicepng.com/png/full/124-1244271_jpg-free-download-drawing-wood-pattern-wood-texture.png");
-    background-repeat: no-repeat;
 }
 
 .teclado{
@@ -52,19 +50,20 @@ body {
 #pantalla {
     display: flex;
     width: 19.5em;
-    border: 1px solid black;
+    height: 2.5em;
+    border: 3px inset rgb(186, 196, 170) ;
     align-items: center;
     justify-content: right;
     padding-right: 0.5em;
     font-family: 'Roboto', sans-serif;
-    font-size: 30px;
-    background-color: rgb(225, 228, 220);
+    font-size: 25px;
+    background-color: rgb(186, 196, 170);
     border-radius: 10px;
     cursor: default;
 }
 
 .calculadora{
-    margin-top: 3em;
+    margin-top: 2em;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
