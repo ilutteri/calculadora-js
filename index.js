@@ -3,27 +3,35 @@ let operador = [];
 let operandoActual;
 let memory = 0;
 
-let pantalla = document.getElementById("pantalla");
+let screen = document.getElementById("screen");
 let btnsNum = document.querySelectorAll(".num");
 let btnsOperators = document.querySelectorAll(".operator");
 let btnsMemory = document.querySelectorAll(".memory");
-let igual = document.getElementById("igual");
+let squareRoot = document.getElementById("raiz");
+let equals = document.getElementById("equals");
 let clear = document.getElementById("clear");
+let clearAll = document.getElementById("clearAll");
+let erase = document.getElementById("erase");
+let sign = document.getElementById("sign");
 
 let operandos = {
-  "+": function (numero1, numero2) {
-    return numero1 + numero2;
+  "+": function (num1, num2) {
+    return num1 + num2;
   },
-  "-": function (numero1, numero2) {
-    return numero1 - numero2;
+  "-": function (num1, num2) {
+    return num1 - num2;
   },
-  "x": function (numero1, numero2) {
-    return numero1 * numero2;
+  "x": function (num1, num2) {
+    return num1 * num2;
   },
-  "÷": function (numero1, numero2) {
-    return numero1 / numero2;
+  "÷": function (num1, num2) {
+    if(num2 == 0){
+      return "ERROR"
+    }
+    return num1 / num2;
   },
 };
+
 
 let memoryFunctions = {
   "M+": function (numero) {
@@ -39,13 +47,20 @@ let memoryFunctions = {
   },
   "MR": function () {
     numeroActual = memory;
-    actualizarPantalla(memory);
+    refreshScreen(memory);
   },
 }
 
-function actualizarPantalla(numero) {
-  pantalla.innerText = numero;
+function refreshScreen(numero) {
+  screen.innerText = numero;
   return;
+}
+
+function clearScreen() {
+  numeroActual = "0";
+  refreshScreen(numeroActual);
+  numeroActual = [];
+  return
 }
 
 
@@ -57,11 +72,11 @@ btnsNum.forEach((element) => {
     }
     if (
       numeroActual.length < 20 &&
-      !(numeroActual.length === 0 && input === "0")
+      !(numeroActual.length === 0 && (input === "0"|| input === "00"))
       && !(input === "." && numeroActual.includes("."))
     ) {
       numeroActual += input;
-      actualizarPantalla(numeroActual);
+      refreshScreen(numeroActual);
     }
   });
 });
@@ -77,19 +92,55 @@ btnsOperators.forEach((element) => {
 });
 
 
-igual.addEventListener("click", function () {
+squareRoot.addEventListener("click", function (){
+  if(numeroActual <= 0) {
+    numeroActual = "ERROR";
+    refreshScreen(numeroActual);
+    return
+  }
+  numeroActual = String(Math.sqrt(parseFloat(numeroActual)));
+  refreshScreen(numeroActual.toString());
+})
+
+sign.addEventListener("click", function (){
+  if(numeroActual !== "0" && numeroActual.length > 0){
+    numeroActual = String(parseFloat(numeroActual) * -1);
+    refreshScreen(numeroActual);
+  }
+  return
+})
+
+equals.addEventListener("click", function () {
   numeroActual = String(
     operandos[operandoActual](parseFloat(operador), parseFloat(numeroActual))
   );
-  actualizarPantalla(numeroActual);
+  refreshScreen(numeroActual);
+  return
 });
 
+clear.addEventListener("click", function (){
+  clearScreen();
+  return
+})
 
-clear.addEventListener("click", function () {
+
+clearAll.addEventListener("click", function () {
   numeroActual = [];
   operador = [];
-  operadorActual = [];
-  actualizarPantalla("0");
+  operandoActual = [];
+  refreshScreen("0");
+  return
+})
+
+erase.addEventListener("click", function () {
+  numeroActual = numeroActual.slice(0,-1);
+  refreshScreen(numeroActual);
+  if(numeroActual === "" || numeroActual.length === 0){
+    numeroActual = "0";
+    refreshScreen(numeroActual);
+    numeroActual = [];
+  }
+  return
 })
 
 btnsMemory.forEach((element) => {
@@ -97,8 +148,10 @@ btnsMemory.forEach((element) => {
     let input = element.innerHTML;
     if (input === "M+" || input === "M-") {
       memoryFunctions[input](numeroActual);
+      return
     }else{
       memoryFunctions[input]();
+      return
     }
   })
 })
