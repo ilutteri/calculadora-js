@@ -1,80 +1,72 @@
-let actual = [];
+let numeroActual = [];
 let operador = [];
-let resultado = [];
-let operando;
+let pantalla = document.getElementById("pantalla");
+let operandoActual;
+let btnsNum = document.querySelectorAll(".num");
+let btnsOperators = document.querySelectorAll(".operator");
+let igual = document.getElementById("igual");
+let clear = document.getElementById("clear");
 
-var operandos = {
-    '+': function(a, b) { return a + b },
-    '-': function(a, b) { return a - b },
+let operandos = {
+  "+": function (numero1, numero2) {
+    return numero1 + numero2;
+  },
+  "-": function (numero1, numero2) {
+    return numero1 - numero2;
+  },
+  "*": function (numero1, numero2) {
+    return numero1 * numero2;
+  },
+  "/": function (numero1, numero2) {
+    return numero1 / numero2;
+  },
 };
 
-function convertirANumero(arr) {
-    let num = parseFloat(arr.join(''));
-    return num;
+function actualizarPantalla(numero) {
+  pantalla.innerText = numero;
+  return;
 }
 
-function convertirAArreglo(num){
-    let arr = num.toString().split('');
-    return arr;
-}
 
-function actualizarPantalla(){
-    document.getElementById("pantalla").innerHTML = "<p>"+ actual.join('') + "</p>";
-    return;
-}
-
-function agregarNum(num){
-    if(actual.length <= 19 && !(actual.length == 0 && num == 0)){
-        actual.push(num);
-        actualizarPantalla();
+btnsNum.forEach((element) => {
+  element.addEventListener("click", function () {
+    let input = element.innerHTML;
+    if(input === "." && numeroActual.length === 0){
+        numeroActual = "0";
     }
-    return;
-}
+    if (
+      numeroActual.length < 20 &&
+      !(numeroActual.length === 0 && input === "0") 
+      && !(input === "." && numeroActual.includes("."))
+    ) {
+      numeroActual += input;
+      actualizarPantalla(numeroActual);
+    }
+  });
+});
 
-function borrarTodo(){
-    actual = [];
+
+btnsOperators.forEach((element) => {
+  element.addEventListener("click", function () {
+    let input = element.innerHTML;
+    operandoActual = input;
+    operador = numeroActual;
+    numeroActual = [];
+  });
+});
+
+
+igual.addEventListener("click", function () {
+  numeroActual = String(
+    operandos[operandoActual](parseFloat(operador), parseFloat(numeroActual))
+  );
+  actualizarPantalla(numeroActual);
+});
+
+
+clear.addEventListener("click", function(){
+    numeroActual = [];
     operador = [];
-    resultado = [];
-    document.getElementById("pantalla").innerHTML = "<p> 0 </p>";
-    return;
-}
-
-function suma(){
-    if(operador > 0){
-        let suma = operador + convertirANumero(actual);
-        actual = convertirAArreglo(suma);
-        resultado = convertirAArreglo(suma);
-        operador = suma;
-        actualizarPantalla();
-        actual = [];
-        operando = '+';
-        return;
-    }else{
-        resultado = actual;
-        operador = convertirANumero(actual);
-        actual = [];
-        return;
-    }
-}
-
-function resta(){
-    if(operador> 0){
-        let resta = operador - convertirANumero(actual);
-        actual = convertirAArreglo(resta);
-        resultado = convertirAArreglo(resta);
-        operador = resta;
-        actualizarPantalla();
-        operando = '-';
-        actual = [];
-    }else{
-        resultado = actual;
-        operador = convertirANumero(actual);
-        actual = [];
-    }
-}
-
-function igual() {
-    actual = convertirAArreglo(operandos[operando](convertirANumero(actual), operador));
-    actualizarPantalla();
-    return;
-}
+    operadorActual= [];
+    actualizarPantalla("0");
+})
