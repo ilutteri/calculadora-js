@@ -1,5 +1,5 @@
 let numeroActual = [];
-let operador = [];
+let operador = "0";
 let operandoActual;
 let memory = 0;
 
@@ -51,17 +51,18 @@ let memoryFunctions = {
   },
 }
 
-function refreshScreen(numero) {
+const refreshScreen = (numero) => {
   screen.innerText = numero;
   return;
 }
 
-function clearScreen() {
+const clearScreen = () => {
   numeroActual = "0";
   refreshScreen(numeroActual);
   numeroActual = [];
   return
 }
+
 
 
 btnsNum.forEach((element) => {
@@ -86,7 +87,8 @@ btnsOperators.forEach((element) => {
   element.addEventListener("click", function () {
     let input = element.innerHTML;
     operandoActual = input;
-    operador = numeroActual;
+    operador = String(parseFloat(operador) + parseFloat(numeroActual));
+    console.log(operador);
     numeroActual = [];
   });
 });
@@ -114,6 +116,8 @@ equals.addEventListener("click", function () {
   numeroActual = String(
     operandos[operandoActual](parseFloat(operador), parseFloat(numeroActual))
   );
+  operador = "0";
+
   refreshScreen(numeroActual);
   return
 });
@@ -126,7 +130,7 @@ clear.addEventListener("click", function (){
 
 clearAll.addEventListener("click", function () {
   numeroActual = [];
-  operador = [];
+  operador = "0";
   operandoActual = [];
   refreshScreen("0");
   return
