@@ -1,14 +1,22 @@
 let actual = [];
-let operador = [];
+let operador;
+let operadorIgual = undefined;
+let auxIgual = undefined;
 let resultado = [];
-let operando;
+let operandoGlobal;
 
-var operandos = {
+var operaciones = {
     '+': function(a, b) { return a + b },
     '-': function(a, b) { return a - b },
+    '*': function(a, b) { return a * b },
+    '/': function(a, b) { if(b != 0) {
+                             return a / b;      
+                        } else {
+                            return "ERROR";
+                        }}
 };
 
-function convertirANumero(arr) {
+function convertirANumero(arr = []) {
     let num = parseFloat(arr.join(''));
     return num;
 }
@@ -18,63 +26,59 @@ function convertirAArreglo(num){
     return arr;
 }
 
-function actualizarPantalla(){
-    document.getElementById("pantalla").innerHTML = "<p>"+ actual.join('') + "</p>";
+function actualizarPantalla(number = ''){
+    if(number == "NaN") number = 'ERROR';
+    document.getElementById("pantalla").innerHTML = "<p>"+ number + "</p>";
     return;
 }
 
 function agregarNum(num){
-    if(actual.length <= 19 && !(actual.length == 0 && num == 0)){
+    if(actual.length <= 19 && !(actual.length == 1 && num == 0)){
         actual.push(num);
-        actualizarPantalla();
+        actualizarPantalla(actual.join(''));
     }
     return;
 }
 
 function borrarTodo(){
     actual = [];
-    operador = [];
+    operador = undefined;
     resultado = [];
-    document.getElementById("pantalla").innerHTML = "<p> 0 </p>";
+    operadorIgual = undefined;
+    auxIgual = undefined;
+    actualizarPantalla(0);
     return;
 }
 
-function suma(){
-    if(operador > 0){
-        let suma = operador + convertirANumero(actual);
-        actual = convertirAArreglo(suma);
-        resultado = convertirAArreglo(suma);
-        operador = suma;
-        actualizarPantalla();
+
+function operacion(operando = ''){
+    if(operador) {
+        console.log(operandoGlobal)
+        let resultado = operaciones[operandoGlobal](operador,convertirANumero(actual));
+        actualizarPantalla(resultado.toString());
+        operador = resultado;
         actual = [];
-        operando = '+';
-        return;
-    }else{
-        resultado = actual;
+    } else {
         operador = convertirANumero(actual);
+        operadorIgual = undefined;
+        operandoGlobal = operando;
         actual = [];
-        return;
     }
 }
 
-function resta(){
-    if(operador> 0){
-        let resta = operador - convertirANumero(actual);
-        actual = convertirAArreglo(resta);
-        resultado = convertirAArreglo(resta);
-        operador = resta;
-        actualizarPantalla();
-        operando = '-';
-        actual = [];
-    }else{
-        resultado = actual;
-        operador = convertirANumero(actual);
-        actual = [];
-    }
-}
 
 function igual() {
-    actual = convertirAArreglo(operandos[operando](convertirANumero(actual), operador));
-    actualizarPantalla();
-    return;
+    if(!operandoGlobal){
+        actualizarPantalla(actual.join(''));
+    } else {
+        if(!operadorIgual){
+            operadorIgual = operador;
+            operador = undefined;
+            auxIgual = convertirANumero(actual);
+        }
+        actual = convertirAArreglo(operaciones[operandoGlobal](operadorIgual, convertirANumero(actual)));
+        actualizarPantalla(actual.join(''));
+        operadorIgual = auxIgual;
+        return;
+    }
 }
